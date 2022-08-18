@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 
-function useCrud(url, setData, body){
+function useCrud(){
    function createUser(url, body, end){
       fetch(url, {
          method: 'POST', 
