@@ -62,12 +62,12 @@ function App() {
           <img src={icon} alt="Logo" />
           <h1>{language.title} {users?.length}</h1>
         </div>
-        <SelectLanguage language={language.select} setLang={setLang} />
         <div onClick={darkMode} className="switch">
           <i className="switch-icon fi fi-br-sun"></i>
           <i className="switch-icon fi fi-br-moon"></i>
           <div className="switch-btn"></div>
         </div>
+        <SelectLanguage language={language.select} setLang={setLang} />
         <button onClick={createNewUser}><i className="fi fi-br-plus"></i>{language.btnCreateUser}</button>
       </div>
       <div className="users-list">
