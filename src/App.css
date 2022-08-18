@@ -39,7 +39,6 @@
 }
 
 .warning-active{
-  /* transform: translateY(40px); */
   margin: 0;
 }
 
@@ -268,7 +267,6 @@
   color: #d8d8d8;
   border: #1a1a1a 2px solid;
   background-color: #202020; 
-  box-shadow: -3px 5px 6px rgba(252, 252, 252, 0.1);
 }
 
 .user_data{
@@ -343,17 +341,17 @@
 }
 
 .user-form form{
-  position: relative;
   width: 340px;
   padding: 20px;
   display: flex;
+  row-gap: 15px;
+  position: relative;
+  transform: scale(0);
+  transition: transform  0.5, color 0.5s, background-color 0.5s;
+  border-radius: 6px;
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
-  row-gap: 15px;
-  border-radius: 6px;
-  transform: scale(0);
-  transition: transform  0.5, color 0.5s, background-color 0.5s;
 }
 
 .darck .user-form form{
@@ -382,21 +380,21 @@
 
 .user-form input{
   border: none;
+  border: #202020 1px solid;
   padding: 10px 10px;
   border-radius: 4px;
-  border: #202020 1px solid;
 }
 
 .darck .user-form input{
-  background-color: #202020;
-  border: #505050 1px solid;
   color: #b6b6b6;
+  border: #505050 1px solid;
+  background-color: #202020;
 }
 
 .user-form button{
-  cursor: pointer;
-  border: none;
   color: white;
+  border: none;
+  cursor: pointer;
   padding: 10px;
   border-radius: 4px;
   background-color: var(--Button-color);
@@ -408,19 +406,14 @@
 }
 
 .to_close{
-  cursor: pointer;
-  position: absolute;
   top: 20px;
   right: 20px;
-  font-size: 80%;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  /* width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center; */
+  cursor: pointer;
   padding: 5px 5px 1px 5px;
-  /* background-color: #D85D5D; */
+  position: absolute;
+  font-size: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 
 .to_close:hover{
