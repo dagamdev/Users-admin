@@ -13,8 +13,12 @@ console.log(localData)
 function darkMode(){ // Para el modo oscuro
   document.querySelector(".App").classList.toggle("darck")
   document.querySelector(".switch").classList.toggle("switch-active")
-  if(localData.darkMode){
-    localData.darkMode = false
+  if(localData){
+    if(localData.darkMode){
+      localData.darkMode = false
+    }else{
+      localData.darkMode = false
+    }
     localStorage.setItem("users-crud", JSON.stringify(localData))
   }else{
     localData.darkMode = true
@@ -34,6 +38,7 @@ function App() {
   }, [])
 
   useEffect(()=> {
+    console.log(lang)
     if(localData){
       if(localData.language != lang){
         localData.language = lang
