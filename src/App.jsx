@@ -7,12 +7,23 @@ import useCrud from './hooks/useCrud.js'
 import icon from './assets/iconCrud.png'
 import './App.css'
 
-const localData2 = JSON.parse(localStorage.getItem("users-crud")) || false
+let localData = JSON.parse(localStorage.getItem("users-crud")) || false
+console.log(localData)
+
+function darkMode(){ // Para el modo oscuro
+  document.querySelector(".App").classList.toggle("darck")
+  document.querySelector(".switch").classList.toggle("switch-active")
+  if(localData.darkMode){
+    localData.darkMode = false
+    localStorage.setItem("users-crud", JSON.stringify(localData))
+  }else{
+    localData.darkMode = true
+    localStorage.setItem("users-crud", JSON.stringify({darkMode: true, language: "en"}))
+  }
+}
 
 function App() {
   const [form, setForm] = useState(false) // Información para los formularios
-  const [localData, setLocalData] = useState(JSON.parse(localStorage.getItem("users-crud")) || false)
-  // console.log(localData.language)
   const [lang, setLang] = useState(localData ? localData.language : "en") // Lenguaje
   const language = useLanguage(lang)
   const [users, setUsers] = useState(undefined) // Obtener usuarios 
@@ -23,16 +34,13 @@ function App() {
   }, [])
 
   useEffect(()=> {
-    const localData = JSON.parse(localStorage.getItem("users-crud")) || false
     if(localData){
       if(localData.language != lang){
         localData.language = lang
         localStorage.setItem("users-crud", JSON.stringify(localData))
-        setLocalData(localData)
       }
     }else{
       localStorage.setItem("users-crud", JSON.stringify({darkMode: false, language: lang}))
-      setLocalData({darkMode: false, language: lang})
     }
   }, [lang])
 
@@ -40,18 +48,6 @@ function App() {
     setForm({id: '', type: 'create', firstName: '', lastName: '', email: '', password: '', birthday: '', content: ''})
   }
 
-  // const localData = JSON.parse(localStorage.getItem("users-crud")) || false
-
-  function darkMode(){ // Para el modo oscuro
-    document.querySelector(".App").classList.toggle("darck")
-    document.querySelector(".switch").classList.toggle("switch-active")
-    if(localData.darkMode){
-      localData.darkMode = false
-      localStorage.setItem("users-crud", JSON.stringify({localData}))
-    }else{
-      localStorage.setItem("users-crud", JSON.stringify({darkMode: true, language: "en"}))
-    }
-  }
   
   if(warning.active){ // Para el mensaje de advertencia
     document.querySelector(".warning").classList.add("warning-active")
