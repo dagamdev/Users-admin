@@ -8,48 +8,31 @@ import icon from './assets/iconCrud.png'
 import './App.css'
 
 function App() {
-  const [form, setForm] = useState(false)
-  const [users, setUsers] = useState(undefined)
-  const [lang, setLang] = useState("en")
+  const [form, setForm] = useState(false) // Información para los formularios
+  const [lang, setLang] = useState("en") // Lenguaje
   const language = useLanguage(lang)
-  const [warning, setWarning] = useState({active: false, text: undefined})
-
-  // if(lang){
-  //   const lll = useLanguage(lang)
-  //   setLanguage(lll)
-  //   setLang(false)
-  // }
+  const [users, setUsers] = useState(undefined) // Obtener usuarios 
+  const [warning, setWarning] = useState({active: false, text: undefined}) // Para el mensaje de advertencia
 
   useEffect(()=>{
     useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers)
   }, [])
-  function createNewUser(){
-    setForm({id: '', type: 'create', firstName: '', lastName: '', email: '', password: '', birthday: '', button: 'Add new user'})
+
+  function createNewUser(){ 
+    setForm({id: '', type: 'create', firstName: '', lastName: '', email: '', password: '', birthday: '', content: ''})
   }
 
-  function darkMode(event){
+  function darkMode(){ // Para el modo oscuro
     document.querySelector(".App").classList.toggle("darck")
     document.querySelector(".switch").classList.toggle("switch-active")
-    // const switchEl = 
-    if(switchBtn.classList.contains("active-btn")){
-
-    }
   }
 
-  if(warning.active){
+  if(warning.active){ // Para el mensaje de advertencia
     document.querySelector(".warning").classList.add("warning-active")
     setTimeout(()=>{
       document.querySelector(".warning").classList.remove("warning-active")
       setWarning({active: false, text: warning.text})
     }, 6000)
-
-    // setTimeout(()=>{
-    //   document.querySelector(".warning").classList.add("warning-active")
-    //   setTimeout(()=>{
-    //     document.querySelector(".warning").classList.remove("warning-active")
-    //     setWarning({active: false, text: warning.text})
-    //   }, 6000)
-    // }, 800)
   }
 
   return (
@@ -57,6 +40,7 @@ function App() {
       <div className="warning">
         <p>⚠️ {warning.text}</p>
       </div>
+
       <div className="header">
         <div className="header-title">
           <img src={icon} alt="Logo" />
@@ -70,9 +54,11 @@ function App() {
         <SelectLanguage language={language.select} setLang={setLang} />
         <button onClick={createNewUser}><i className="fi fi-br-plus"></i>{language.btnCreateUser}</button>
       </div>
+
       <div className="users-list">
       {users?.map(user=> <UsersList key={Object.values(user).join("")} user={user} setUsers={setUsers} setForm={setForm} language={language} />)}
       </div>
+
       {!form || <UsersForm form={form} setForm={setForm} users={users} setUsers={setUsers} setWarning={setWarning} language={language} />}
     </div>
   )

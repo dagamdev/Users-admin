@@ -69,7 +69,6 @@
 .select-language{
   width: 125px;
   height: 30px;
-  z-index: 4;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -81,7 +80,7 @@
   cursor: pointer;
   border: #bdbdbd 1px solid;
   display: flex;
-  z-index: 11;
+  z-index: 2;
   padding: 4px 10px;
   font-size: 15px;
   column-gap: 4px;
@@ -138,11 +137,11 @@
 }
 
 .open-select .select{
-  box-shadow: -2px 3px 8px rgba(2, 2, 2, 0.160);
-  transform: translateY(2px);
   height: 84px;
+  z-index: 5;
+  transform: translateY(2px);
+  box-shadow: -2px 3px 8px rgba(2, 2, 2, 0.160);
   padding-top: 10px;
-  z-index: 14;
 }
 
 .select::-webkit-scrollbar{
@@ -338,6 +337,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
+  z-index: 10;
   display: flex;
   position: fixed;
   align-items: center;
@@ -377,17 +377,29 @@
   font-weight: 700;
 }
 
-.user-form form div{
+.user-form form > div{
   display: flex;
-  flex-direction: column;
   row-gap: 6px;
+  flex-direction: column;
+}
+
+.password{
+  position: relative;
 }
 
 .user-form input{
+  width: 100%;
   border: none;
   border: #202020 1px solid;
   padding: 10px 10px;
   border-radius: 4px;
+}
+
+.password-eye{
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  position: absolute;
 }
 
 .darck .user-form input{
@@ -419,6 +431,7 @@
   font-size: 80%;
   aspect-ratio: 1;
   border-radius: 50%;
+  /* display: none; */
 }
 
 .to_close:hover{

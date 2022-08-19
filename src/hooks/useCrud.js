@@ -1,6 +1,4 @@
-import {useState, useEffect} from "react";
-
-function useCrud(){
+export default function useCrud(){
    function createUser(url, body, end){
       fetch(url, {
          method: 'POST', 
@@ -27,4 +25,3 @@ function useCrud(){
 
    return {createUser, read, updateUser, deleteUser}
 }
-export default useCrud

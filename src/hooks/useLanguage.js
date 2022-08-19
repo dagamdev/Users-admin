@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const languages = {
+const languages = { // Todas las palabras que se utilizan en los dos lenguajes
   'en': {
     title: 'Users',
     btnCreateUser: 'Create new user',
@@ -71,7 +71,8 @@ const languages = {
     }
   }
 }
-export default function useLanguage(value){
+
+export default function useLanguage(value){ // Devuelve el objeto con el lenguaje indicado
   const  [language, setLanguage] = useState(languages['en'])
   useEffect(()=> {
     setLanguage(languages[value])

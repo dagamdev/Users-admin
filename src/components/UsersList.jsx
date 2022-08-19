@@ -2,11 +2,12 @@ import React from "react";
 import useCrud from "../hooks/useCrud";
 
 export default function UsersList({user, setUsers, setForm, language}){
-   function deleteUser(event){
-      function accept(){
+   function deleteUser(){
+      function accept(){ // Para eliminar el usuario y recargar de nuevo los usuarios
          useCrud().deleteUser(`https://users-crud1.herokuapp.com/users/${user.id}/`, ()=> useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers))
       }
-      setForm({id: user.id, type: 'update', firstName: user.first_name, lastName: user.last_name, email: user.email, password: user.password, birthday: user.birthday, button: 'Update', content: (
+
+      setForm({id: '', type: '', firstName: '', lastName: '', email: '', password: '', birthday: '', content: ( // Se actualizan los datos de form
          <>
             <h2>{language.deleteUser.title}</h2>
             <p>{language.deleteUser.content[0]} <span>{`${user.first_name} ${user.last_name}`}</span> {language.deleteUser.content[1]}</p>
@@ -18,10 +19,11 @@ export default function UsersList({user, setUsers, setForm, language}){
       )})
       
    }
-   function updateUser(event){
-      setForm({id: user.id, type: 'update', firstName: user.first_name, lastName: user.last_name, email: user.email, password: user.password, birthday: user.birthday, button: 'Update'})
-      // console.log(event.target.parentNode.parentNode.dataset.id)
+
+   function updateUser(){ // Se le pasan datos a form para actualizar el usuario
+      setForm({id: user.id, type: 'update', firstName: user.first_name, lastName: user.last_name, email: user.email, password: user.password, birthday: user.birthday, content: ''})
    }
+
    return (
       <div className="user">
          <h3>{`${user.first_name} ${user.last_name}`}</h3>

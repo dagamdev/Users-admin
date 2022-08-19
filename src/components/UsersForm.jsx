@@ -4,14 +4,14 @@ import useCrud from "../hooks/useCrud";
 export default function UsersForm({form, setForm, users, setUsers, setWarning, language}){
    function submitForm(event){
       event.preventDefault()
-      if(event.target.firstName){
+      if(event.target.firstName){ // En caso de que se encuante el imput con la id firstName se ejecuta lo demas a la vez eso indica que existen los demas inputs
          const firstName = event.target.firstName.value
          const lastName = event.target.lastName.value
          const email = event.target.email.value
          const password = event.target.password.value
          const birthday = event.target.birthday.value
 
-         if(form.id){
+         if(form.id){ // Si form.id contiene algo se ejecuta esto, eso indica que es un update, en caso contratrio que es un create
             if(users.some(s=> s.first_name.toLowerCase() == firstName.toLowerCase()) && users.some(s=> s.last_name.toLowerCase() == lastName.toLowerCase()) && users.some(s=> s.email.toLowerCase() == email.toLowerCase()) && users.some(s=> s.password.toLowerCase() == password.toLowerCase()) && users.some(s=> s.birthday.toLowerCase() == birthday.toLowerCase())) return setWarning({active: true, text: language.noChange})
             useCrud().updateUser(`https://users-crud1.herokuapp.com/users/${form.id}/`, {
                'first_name': firstName, 
@@ -20,9 +20,8 @@ export default function UsersForm({form, setForm, users, setUsers, setWarning, l
                password: password, 
                birthday: birthday
             }, ()=> useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers))
+            
          }else{
-            console.log(email.toLowerCase())
-            // console.log()
             if(users.some(s=> s.first_name.toLowerCase() == firstName.toLowerCase()) && users.some(s=> s.last_name.toLowerCase() == lastName.toLowerCase())) return setWarning({active: true, text: language.userName})
             if(users.some(s=> s.email.toLowerCase() == email.toLowerCase())) return setWarning({active: true, text: language.gmail})
             if(users.some(s=> s.password.toLowerCase() == password.toLowerCase())) return setWarning({active: true, text: language.password})
@@ -36,13 +35,21 @@ export default function UsersForm({form, setForm, users, setUsers, setWarning, l
             }, ()=> useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers))
          }
       }
-      setForm(false)
+      setForm(false) // Se desactiva el formulario
    }
 
-   // console.log(form.type)
-   // console.log(language.form)
-   const formLang = language.form[form.type]
-   console.log(formLang)
+   function watchPasword(){ // Para ver o oculatar la contraseña
+      const inputPassword = document.getElementById("password")
+      if(inputPassword.type == "password"){
+         inputPassword.type = "text"
+      }else{
+         inputPassword.type = "password"
+      }
+      document.querySelector(".password-eye").classList.toggle("fi-br-eye")
+      document.querySelector(".password-eye").classList.toggle("fi-br-eye-crossed")
+   }
+
+   const formLang = language.form[form.type] // Obtiene un objeto con las partes del formulario al lenguaje elegido
 
    return (
       <div className="user-form">
@@ -64,7 +71,10 @@ export default function UsersForm({form, setForm, users, setUsers, setWarning, l
                </div>
                <div>
                   <label htmlFor="password">{formLang.labelName[3]}</label>
-                  <input type="password" id="password" maxLength={100} placeholder="User password" defaultValue={form.password} required />
+                  <div className="password">
+                     <input type="password" id="password" maxLength={100} placeholder="User password" defaultValue={form.password} required />
+                     <i onClick={watchPasword} className="password-eye fi fi-br-eye-crossed"></i>
+                  </div>
                </div>
                <div>
                   <label htmlFor="birthday">{formLang.labelName[4]}</label>

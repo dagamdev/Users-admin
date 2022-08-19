@@ -1,16 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import imgEn from "../assets/english.png"
 import imgEs from "../assets/spanish.png"
-import useLanguage from "../hooks/useLanguage";
 
 export default function SelectLanguage({language, setLang}){
-
-  function openSelect(event){
+  function openSelect(){ // Abre o cierra las opciones de lenguaje
     document.querySelector(".select-language").classList.toggle("open-select")
-    console.log(event.target)
   }
 
-  function select(event){
+  function select(event){ // Para selecionar un lenguaje
     if(event.target.classList.contains("select-option")){
       setLang(event.target.dataset.language)
     }else{
@@ -31,6 +28,7 @@ export default function SelectLanguage({language, setLang}){
           <img src={imgEn} alt={language.english} />
           <p>{language.english}</p>
         </div>
+        
         <div onClick={select} className="select-option es" data-language="es">
           <img src={imgEs} alt={language.spanish} />
           <p>{language.spanish}</p>
