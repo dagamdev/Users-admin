@@ -7,21 +7,12 @@ import useCrud from './hooks/useCrud.js'
 import icon from './assets/iconCrud.png'
 import './App.css'
 
-const localData = JSON.parse(localStorage.getItem("users-crud")) || false
-
-function darkMode(){ // Para el modo oscuro
-  document.querySelector(".App").classList.toggle("darck")
-  document.querySelector(".switch").classList.toggle("switch-active")
-  if(localData.darkMode){
-    localData.darkMode = false
-    localStorage.setItem("users-crud", JSON.stringify({localData}))
-  }else{
-    localStorage.setItem("users-crud", JSON.stringify({darkMode: true, language: "en"}))
-  }
-}
+const localData2 = JSON.parse(localStorage.getItem("users-crud")) || false
 
 function App() {
   const [form, setForm] = useState(false) // Información para los formularios
+  const [localData, setLocalData] = useState(JSON.parse(localStorage.getItem("users-crud")) || false)
+  // console.log(localData.language)
   const [lang, setLang] = useState(localData ? localData.language : "en") // Lenguaje
   const language = useLanguage(lang)
   const [users, setUsers] = useState(undefined) // Obtener usuarios 
@@ -31,8 +22,35 @@ function App() {
     useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers)
   }, [])
 
+  useEffect(()=> {
+    const localData = JSON.parse(localStorage.getItem("users-crud")) || false
+    if(localData){
+      if(localData.language != lang){
+        localData.language = lang
+        localStorage.setItem("users-crud", JSON.stringify(localData))
+        setLocalData(localData)
+      }
+    }else{
+      localStorage.setItem("users-crud", JSON.stringify({darkMode: false, language: lang}))
+      setLocalData({darkMode: false, language: lang})
+    }
+  }, [lang])
+
   function createNewUser(){ 
     setForm({id: '', type: 'create', firstName: '', lastName: '', email: '', password: '', birthday: '', content: ''})
+  }
+
+  // const localData = JSON.parse(localStorage.getItem("users-crud")) || false
+
+  function darkMode(){ // Para el modo oscuro
+    document.querySelector(".App").classList.toggle("darck")
+    document.querySelector(".switch").classList.toggle("switch-active")
+    if(localData.darkMode){
+      localData.darkMode = false
+      localStorage.setItem("users-crud", JSON.stringify({localData}))
+    }else{
+      localStorage.setItem("users-crud", JSON.stringify({darkMode: true, language: "en"}))
+    }
   }
   
   if(warning.active){ // Para el mensaje de advertencia
@@ -52,15 +70,15 @@ function App() {
       <div className="header">
         <div className="header-title">
           <img src={icon} alt="Logo" />
-          <h1>{language.title} {users?.length}</h1>
+          <h1>{language?.title} {users?.length}</h1>
         </div>
         <div onClick={darkMode} className={localData.darkMode ? "switch switch-active" : "switch"}>
           <i className="switch-icon fi fi-br-sun"></i>
           <i className="switch-icon fi fi-br-moon"></i>
           <div className="switch-btn"></div>
         </div>
-        <SelectLanguage language={language.select} setLang={setLang} />
-        <button onClick={createNewUser}><i className="fi fi-br-plus"></i>{language.btnCreateUser}</button>
+        <SelectLanguage language={language?.select} setLang={setLang} />
+        <button onClick={createNewUser}><i className="fi fi-br-plus"></i>{language?.btnCreateUser}</button>
       </div>
 
       <div className="users-list">

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-const localData = JSON.parse(localStorage.getItem("users-crud")) || false
 const languages = { // Todas las palabras que se utilizan en los dos lenguajes
   'en': {
     title: 'Users',
@@ -77,14 +76,6 @@ export default function useLanguage(value){ // Devuelve el objeto con el lenguaj
   const  [language, setLanguage] = useState(languages['en'])
   useEffect(()=> {
     setLanguage(languages[value])
-    if(localData){
-      if(localData.language != value){
-        localData.language = value
-        localStorage.setItem("users-crud", JSON.stringify(localData))
-      }
-    }else{
-      localStorage.setItem("users-crud", JSON.stringify({darkMode: false, language: value}))
-    }
   }, [value])
   return language
 }

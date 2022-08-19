@@ -8,11 +8,13 @@ export default function SelectLanguage({language, setLang}){
   }
 
   function select(event){ // Para selecionar un lenguaje
+    const lang = undefined
     if(event.target.classList.contains("select-option")){
-      setLang(event.target.dataset.language)
+      lang = event.target.dataset.language
     }else{
-      setLang(event.target.parentNode.dataset.language)
+      lang = event.target.parentNode.dataset.language
     }
+    setLang(lang)
   }
 
   return (
