@@ -16,7 +16,7 @@ function darkMode(){ // Para el modo oscuro
     if(localData.darkMode){
       localData.darkMode = false
     }else{
-      localData.darkMode = false
+      localData.darkMode = true
     }
     localStorage.setItem("users-crud", JSON.stringify(localData))
   }else{
