@@ -8,7 +8,6 @@ import icon from './assets/iconCrud.png'
 import './App.css'
 
 let localData = JSON.parse(localStorage.getItem("users-crud")) || false
-console.log(localData)
 
 function darkMode(){ // Para el modo oscuro
   document.querySelector(".App").classList.toggle("darck")
@@ -38,7 +37,6 @@ function App() {
   }, [])
 
   useEffect(()=> {
-    console.log(lang)
     if(localData){
       if(localData.language != lang){
         localData.language = lang
