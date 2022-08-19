@@ -7,9 +7,22 @@ import useCrud from './hooks/useCrud.js'
 import icon from './assets/iconCrud.png'
 import './App.css'
 
+const localData = JSON.parse(localStorage.getItem("users-crud")) || false
+
+function darkMode(){ // Para el modo oscuro
+  document.querySelector(".App").classList.toggle("darck")
+  document.querySelector(".switch").classList.toggle("switch-active")
+  if(localData.darkMode){
+    localData.darkMode = false
+    localStorage.setItem("users-crud", JSON.stringify({localData}))
+  }else{
+    localStorage.setItem("users-crud", JSON.stringify({darkMode: true, language: "en"}))
+  }
+}
+
 function App() {
   const [form, setForm] = useState(false) // Información para los formularios
-  const [lang, setLang] = useState("en") // Lenguaje
+  const [lang, setLang] = useState(localData ? localData.language : "en") // Lenguaje
   const language = useLanguage(lang)
   const [users, setUsers] = useState(undefined) // Obtener usuarios 
   const [warning, setWarning] = useState({active: false, text: undefined}) // Para el mensaje de advertencia
@@ -21,12 +34,7 @@ function App() {
   function createNewUser(){ 
     setForm({id: '', type: 'create', firstName: '', lastName: '', email: '', password: '', birthday: '', content: ''})
   }
-
-  function darkMode(){ // Para el modo oscuro
-    document.querySelector(".App").classList.toggle("darck")
-    document.querySelector(".switch").classList.toggle("switch-active")
-  }
-
+  
   if(warning.active){ // Para el mensaje de advertencia
     document.querySelector(".warning").classList.add("warning-active")
     setTimeout(()=>{
@@ -36,7 +44,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className={localData.darkMode ? "App darck" : "App"}>
       <div className="warning">
         <p>⚠️ {warning.text}</p>
       </div>
@@ -46,7 +54,7 @@ function App() {
           <img src={icon} alt="Logo" />
           <h1>{language.title} {users?.length}</h1>
         </div>
-        <div onClick={darkMode} className="switch">
+        <div onClick={darkMode} className={localData.darkMode ? "switch switch-active" : "switch"}>
           <i className="switch-icon fi fi-br-sun"></i>
           <i className="switch-icon fi fi-br-moon"></i>
           <div className="switch-btn"></div>
