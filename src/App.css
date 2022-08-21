@@ -386,7 +386,7 @@
   position: fixed;
   align-items: center;
   justify-content: center;
-  backdrop-filter: brightness(50%);
+  backdrop-filter: brightness(50%) blur(1px);
 }
 
 .user-form form{

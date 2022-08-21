@@ -66,7 +66,7 @@ const languages = { // Todas las palabras que se utilizan en los dos lenguajes
     password: 'Esa contraseña ya existe.',
     noChange: 'No se ha realizado ningún cambio.',
     card: {
-      email: 'Coreo',
+      email: 'Correo',
       birthday: 'Cumpleaños' 
     }
   }
