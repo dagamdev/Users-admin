@@ -5,6 +5,7 @@ import SelectLanguage from './components/SelectLanguage.jsx'
 import useLanguage from './hooks/useLanguage.js'
 import useCrud from './hooks/useCrud.js'
 import icon from './assets/iconCrud.png'
+import { endPoint } from "./data.json"
 import './App.css'
 
 let localData = JSON.parse(localStorage.getItem("users-crud")) || false
@@ -33,7 +34,7 @@ function App() {
   const [warning, setWarning] = useState({active: false, text: undefined}) // Para el mensaje de advertencia
 
   useEffect(()=>{
-    useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers)
+    useCrud().read(endPoint+'users', setUsers)
   }, [])
 
   useEffect(()=> {

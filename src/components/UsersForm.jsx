@@ -1,5 +1,6 @@
 import React from "react";
 import useCrud from "../hooks/useCrud";
+import { endPoint } from "../data.json"
 
 export default function UsersForm({form, setForm, users, setUsers, setWarning, language}){
    function submitForm(event){
@@ -10,29 +11,30 @@ export default function UsersForm({form, setForm, users, setUsers, setWarning, l
          const email = event.target.email.value
          const password = event.target.password.value
          const birthday = event.target.birthday.value
+         console.log({firstName})
 
          if(form.id){ // Si form.id contiene algo se ejecuta esto, eso indica que es un update, en caso contratrio que es un create
-            if(users.some(s=> s.first_name.toLowerCase() == firstName.toLowerCase()) && users.some(s=> s.last_name.toLowerCase() == lastName.toLowerCase()) && users.some(s=> s.email.toLowerCase() == email.toLowerCase()) && users.some(s=> s.password.toLowerCase() == password.toLowerCase()) && users.some(s=> s.birthday.toLowerCase() == birthday.toLowerCase())) return setWarning({active: true, text: language.noChange})
-            useCrud().updateUser(`https://users-crud1.herokuapp.com/users/${form.id}/`, {
-               'first_name': firstName, 
-               'last_name': lastName, 
-               email: email, 
-               password: password, 
-               birthday: birthday
-            }, ()=> useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers))
+            if(users.some(s=> s.firstName.toLowerCase() == firstName.toLowerCase()) && users.some(s=> s.lastName.toLowerCase() == lastName.toLowerCase()) && users.some(s=> s.email.toLowerCase() == email.toLowerCase()) && users.some(s=> s.password.toLowerCase() == password.toLowerCase()) && users.some(s=> s.birthday.toLowerCase() == birthday.toLowerCase())) return setWarning({active: true, text: language.noChange})
+            useCrud().updateUser(endPoint+`users/${form.id}/`, {
+               firstName, 
+               lastName, 
+               email, 
+               password, 
+               birthday
+            }, ()=> useCrud().read(endPoint+'users/', setUsers))
             
          }else{
-            if(users.some(s=> s.first_name.toLowerCase() == firstName.toLowerCase()) && users.some(s=> s.last_name.toLowerCase() == lastName.toLowerCase())) return setWarning({active: true, text: language.userName})
+            if(users.some(s=> s.firstName.toLowerCase() == firstName.toLowerCase()) && users.some(s=> s.lastName.toLowerCase() == lastName.toLowerCase())) return setWarning({active: true, text: language.userName})
             if(users.some(s=> s.email.toLowerCase() == email.toLowerCase())) return setWarning({active: true, text: language.gmail})
             if(users.some(s=> s.password.toLowerCase() == password.toLowerCase())) return setWarning({active: true, text: language.password})
             
-            useCrud().createUser('https://users-crud1.herokuapp.com/users/', {
-               'first_name': firstName, 
-               'last_name': lastName, 
-               email: email, 
-               password: password, 
-               birthday: birthday
-            }, ()=> useCrud().read('https://users-crud1.herokuapp.com/users/', setUsers))
+            useCrud().createUser(endPoint+'users/', {
+               firstName, 
+               lastName, 
+               email, 
+               password, 
+               birthday
+            }, ()=> useCrud().read(endPoint+'users/', setUsers))
          }
       }
       setForm(false) // Se desactiva el formulario
