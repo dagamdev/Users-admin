@@ -357,16 +357,45 @@
   border-radius: 5px;
 }
 
+.user_option{
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
 .btn-delete{
   color: white;
   border: var(--Delete-active) 1px solid;
+  position: relative;
   background-color: var(--Delete);
 }
 
 .btn-update{
-  border: var(--Border-gray) 1px solid;
-  background-color: #F7F7F7;
   color: rgb(126, 126, 126);
+  border: var(--Border-gray) 1px solid;
+  position: relative;
+  background-color: #F7F7F7;
+}
+
+.user_option-title{
+  top: -70%;
+  z-index: 2;
+  font-size: 13px;
+  transform: scale(0);
+  padding: 2px 6px;
+  position: absolute;
+  transition: transform 0.3s;
+  border-radius: 4px;
+  background-color: #afafaf;
+}
+
+.darck .user_option-title{
+  color: #e2e2e2;
+  background-color: saddlebrown;
+}
+
+.user_option-title::first-letter{
+  text-transform: uppercase;
 }
 
 .btn-delete:hover{
@@ -377,6 +406,11 @@
 .btn-update:hover{
   transform: scale(0.95);
   background-color: var(--Border-gray);
+}
+
+.user_option:hover .user_option-title{
+  /* opacity: 100%; */
+  transform: scale(1);
 }
 
 

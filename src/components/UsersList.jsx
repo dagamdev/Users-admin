@@ -1,6 +1,7 @@
 import React from "react";
 import useCrud from "../hooks/useCrud";
 import { endPoint } from "../data.json" 
+import { OptionTitel } from "./OptionTitle";
 
 export default function UsersList({user, setUsers, setForm, language}){
    function deleteUser(){
@@ -33,8 +34,18 @@ export default function UsersList({user, setUsers, setForm, language}){
             <p><span className="user_data-title">{language.card.birthday}:</span> <span><i className="fi fi-br-gift"> </i>{user.birthday.slice(0, 10)}</span></p>
          </div>
          <div className="user_options" data-id={user.id}>
-            <button onClick={deleteUser} className="btn-delete"><i className="fi fi-br-trash"></i></button>
-            <button onClick={updateUser} className="btn-update"><i className="fi fi-br-pencil"></i></button>
+            <div className="user_option">
+               <OptionTitel title={language.card.options.delete} />
+               <button onClick={deleteUser} className="user_option-btn btn-delete">
+                  <i className="fi fi-br-trash"></i>
+               </button>
+            </div>
+            <div className="user_option">
+               <OptionTitel title={language.card.options.edit} />
+               <button onClick={updateUser} className="user_option-btn btn-update">
+                  <i className="fi fi-br-pencil"></i>
+               </button>
+            </div>
          </div>
       </div>
    )
