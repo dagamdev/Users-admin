@@ -4,6 +4,11 @@
     "en": {
       "title": "Users",
       "btnCreateUser": "Create new user",
+      "mode": {
+        "light": "light mode",
+        "dark": "dark mode"
+      },
+      "lenguage": "select a language",
       "select": {
         "type": "en",
         "english": "English",
@@ -57,6 +62,11 @@
     "es": {
       "title": "Usuarios",
       "btnCreateUser": "Crear nuevo usuario",
+      "mode": {
+        "light": "modo de luz",
+        "dark": "modo oscuro"
+      },
+      "lenguage": "selecciona un idioma",
       "select": {
         "type": "es",
         "english": "Inglés",
