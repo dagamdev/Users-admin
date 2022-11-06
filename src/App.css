@@ -66,12 +66,37 @@
   color: white;
 }
 
+.option-title{
+  top: -60%;
+  width: 90px;
+  z-index: 2;
+  padding: 2px 6px;
+  position: absolute;
+  font-size: 13px;
+  transform: scale(0);
+  text-align: center;
+  transition: transform 0.3s, background-color 0.5s, color 0.5s;
+  border-radius: 4px;
+  background-color: #afafaf;
+}
+
 .select-language{
   width: 125px;
   height: 30px;
   display: flex;
   position: relative;
+  align-items: center;
   flex-direction: column;
+  justify-content: center;
+}
+
+.select-language:hover .language_option-title{
+  transform: scale(1);
+}
+
+.language_option-title{
+  top: -40px;
+  font-size: 12px;
 }
 
 .selected{
@@ -184,9 +209,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between; */
   position: relative;
   transition: background-color 0.5s;
   box-shadow: -2px 3px 6px rgba(2, 2, 2, 0.2);
@@ -207,9 +229,8 @@
 }
 
 .mode_option-title{
+  top: -26px;
   position: absolute;
-  top: -30px;
-  /* background-color: #1d1d1d; */
 }
 
 .switch-active{
@@ -237,20 +258,6 @@
 
 .switch-active .icon2{
   transform: scale(1);
-}
-
-.option-title{
-  top: -80%;
-  width: 90px;
-  z-index: 2;
-  padding: 2px 6px;
-  position: absolute;
-  font-size: 13px;
-  transform: scale(0);
-  text-align: center;
-  transition: transform 0.3s, background-color 0.5s, color 0.5s;
-  border-radius: 4px;
-  background-color: #afafaf;
 }
 
 .option-title::first-letter{

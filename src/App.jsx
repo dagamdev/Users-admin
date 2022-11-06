@@ -81,7 +81,7 @@ function App() {
             <div className="switch-btn"></div>
           </div>
         </div>
-        <SelectLanguage language={language?.select} setLang={setLang} />
+        <SelectLanguage language={language} setLang={setLang} />
         <button onClick={createNewUser}><i className="fi fi-br-plus"></i>{language?.btnCreateUser}</button>
       </div>
 
