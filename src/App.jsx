@@ -7,6 +7,7 @@ import useCrud from './hooks/useCrud.js'
 import icon from './assets/iconCrud.png'
 import { endPoint } from "./data.json"
 import './App.css'
+import { OptionTitel } from './components/OptionTitle.jsx'
 
 let localData = JSON.parse(localStorage.getItem("users-crud")) || false
 
@@ -73,9 +74,12 @@ function App() {
           <h1>{language?.title} {users?.length}</h1>
         </div>
         <div onClick={darkMode} className={localData.darkMode ? "switch switch-active" : "switch"}>
-          <i className="switch-icon fi fi-br-sun"></i>
-          <i className="switch-icon fi fi-br-moon"></i>
-          <div className="switch-btn"></div>
+          <OptionTitel firstClass={'mode'} title={localData.darkMode ? language.mode.dark : language.mode.light} />
+          <div className="switch_content-icons">
+            <i className="switch-icon icon1 fi fi-br-sun"></i>
+            <i className="switch-icon icon2 fi fi-br-moon"></i>
+            <div className="switch-btn"></div>
+          </div>
         </div>
         <SelectLanguage language={language?.select} setLang={setLang} />
         <button onClick={createNewUser}><i className="fi fi-br-plus"></i>{language?.btnCreateUser}</button>

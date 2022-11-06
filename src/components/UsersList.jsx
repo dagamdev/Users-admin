@@ -35,13 +35,13 @@ export default function UsersList({user, setUsers, setForm, language}){
          </div>
          <div className="user_options" data-id={user.id}>
             <div className="user_option">
-               <OptionTitel title={language.card.options.delete} />
+               <OptionTitel firstClass={'user'} title={language.card.options.delete} />
                <button onClick={deleteUser} className="user_option-btn btn-delete">
                   <i className="fi fi-br-trash"></i>
                </button>
             </div>
             <div className="user_option">
-               <OptionTitel title={language.card.options.edit} />
+               <OptionTitel firstClass={'user'} title={language.card.options.edit} />
                <button onClick={updateUser} className="user_option-btn btn-update">
                   <i className="fi fi-br-pencil"></i>
                </button>
