@@ -68,7 +68,6 @@
 
 .option-title{
   top: -60%;
-  width: 90px;
   z-index: 2;
   padding: 2px 6px;
   position: absolute;
@@ -96,6 +95,7 @@
 
 .language_option-title{
   top: -40px;
+  width: 90px;
   font-size: 12px;
 }
 
@@ -230,6 +230,7 @@
 
 .mode_option-title{
   top: -26px;
+  width: 90px;
   position: absolute;
 }
 
